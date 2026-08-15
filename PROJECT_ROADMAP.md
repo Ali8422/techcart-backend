@@ -9,10 +9,10 @@
 
 ## 🗺️ Phase Tracker
 
-| Phase | Description | Status | Current Branch |
-| :--- | :--- | :---: | :--- |
-| **Phase 1** | Project Setup & Architecture Foundations | 🟡 IN PROGRESS | `feature/phase1-backend-setup` |
-| **Phase 2** | Database Design, JPA Entities & Persistence | ⚪ NOT STARTED | - |
+| Phase | Description |    Status     | Current Branch |
+| :--- | :--- |:-------------:| :--- |
+| **Phase 1** | Project Setup & Architecture Foundations |      🟢 COMPLETED       | `feature/phase1-backend-setup` |
+| **Phase 2** | Database Design, JPA Entities & Persistence | 🟡 IN PROGRESS | `feature/phase2-jpa-entities` |
 | **Phase 3** | Service Layer & SOLID Business Logic | ⚪ NOT STARTED | - |
 | **Phase 4** | DTOs, Mapper Layer & REST API Controllers | ⚪ NOT STARTED | - |
 | **Phase 5** | Security, JWT Authentication & Authorization | ⚪ NOT STARTED | - |
