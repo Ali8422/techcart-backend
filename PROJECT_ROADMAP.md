@@ -9,13 +9,13 @@
 
 ## 🗺️ Phase Tracker
 
-| Phase | Description |    Status     | Current Branch |
-| :--- | :--- |:-------------:| :--- |
-| **Phase 1** | Project Setup & Architecture Foundations |      🟢 COMPLETED       | `feature/phase1-backend-setup` |
-| **Phase 2** | Database Design, JPA Entities & Persistence | 🟡 IN PROGRESS | `feature/phase2-jpa-entities` |
-| **Phase 3** | Service Layer & SOLID Business Logic | ⚪ NOT STARTED | - |
-| **Phase 4** | DTOs, Mapper Layer & REST API Controllers | ⚪ NOT STARTED | - |
-| **Phase 5** | Security, JWT Authentication & Authorization | ⚪ NOT STARTED | - |
+| Phase | Description | Status | Current Branch |
+| :--- | :--- | :---: | :--- |
+| **Phase 1** | Project Setup & Architecture Foundations | 🟢 COMPLETED | `main` |
+| **Phase 2** | Database Design, JPA Entities & Persistence | 🟢 COMPLETED | `main` |
+| **Phase 3** | Service Layer & SOLID Business Logic | 🟢 COMPLETED | `main` |
+| **Phase 4** | REST Controllers & DTO Mapping | 🟢 COMPLETED | `main` |
+| **Phase 5** | Security & JWT Authentication | 🟡 IN PROGRESS | `feature/phase5-spring-security-jwt` |
 | **Phase 6** | Global Exception Handling & Request Validation | ⚪ NOT STARTED | - |
 | **Phase 7** | Production Containerization & Integration | ⚪ NOT STARTED | - |
 
