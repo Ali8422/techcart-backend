@@ -15,8 +15,8 @@
 | **Phase 2** | Database Design, JPA Entities & Persistence | 🟢 COMPLETED | `main` |
 | **Phase 3** | Service Layer & SOLID Business Logic | 🟢 COMPLETED | `main` |
 | **Phase 4** | REST Controllers & DTO Mapping | 🟢 COMPLETED | `main` |
-| **Phase 5** | Security & JWT Authentication | 🟡 IN PROGRESS | `feature/phase5-spring-security-jwt` |
-| **Phase 6** | Global Exception Handling & Request Validation | ⚪ NOT STARTED | - |
+| **Phase 5** | Security & JWT Authentication | 🟢 COMPLETED | `main` |
+| **Phase 6** | Exception Handling & Validation | 🟡 IN PROGRESS | `feature/phase6-exception-handling-validation` |
 | **Phase 7** | Production Containerization & Integration | ⚪ NOT STARTED | - |
 
 ---

@@ -1,5 +1,6 @@
 package techcart_backend.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class OrderController {
     private final OrderMapper orderMapper;
 
     @PostMapping
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderCreateRequest request) {
+    public ResponseEntity<OrderResponse> createOrder(@Valid @RequestBody OrderCreateRequest request) {
         List<OrderItem> items = request.getItems().stream().map(itemReq -> {
             Product product = Product.builder().id(itemReq.getProductId()).build();
             return OrderItem.builder()
