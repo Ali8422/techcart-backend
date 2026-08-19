@@ -1,12 +1,12 @@
 package techcart_backend.service;
 
-import techcart_backend.entity.Product;
+import techcart_backend.dto.ProductRequest;
+import techcart_backend.dto.ProductResponse;
 
 import java.util.List;
 
 public interface ProductService {
-    List<Product> getAllProducts();
-    Product getProductById(Long id);
-    List<Product> getProductsByCategory(String category);
-    Product createProduct(Product product);
+    List<ProductResponse> getAllProducts();
+    ProductResponse getProductById(Long id);
+    ProductResponse createProduct(ProductRequest request);
 }

@@ -15,11 +15,18 @@ public class ProductRequest {
     @NotBlank(message = "Product name is required")
     private String name;
 
-    private String description;
+    @NotBlank(message = "Category is required")
+    private String category;
 
     @NotNull(message = "Price is required")
     @Positive(message = "Price must be greater than zero")
     private BigDecimal price;
+
+    private Double rating;
+
+    private String image;
+
+    private String description;
 
     @NotNull(message = "Stock quantity is required")
     @Positive(message = "Stock quantity must be greater than zero")

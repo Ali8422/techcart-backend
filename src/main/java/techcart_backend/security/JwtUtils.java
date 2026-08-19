@@ -3,70 +3,61 @@ package techcart_backend.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
 public class JwtUtils {
 
-    // 1. Generates a cryptographically secure 256-bit secret key for HMAC-SHA256
-    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    @Value("${app.jwt.secret}")
+    private String jwtSecret;
 
-    /**
-     * Generates a signed JWT token for an authenticated user.
-     *
-     * @param email The authenticated user's email address (used as Subject)
-     * @return Compact Base64URL-encoded JWT string
-     */
+    private SecretKey key;
+
+    @PostConstruct
+    public void init() {
+        // Runs safely AFTER Spring injects the property.
+        // Requires a minimum of 256 bits (32 bytes).
+        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+    }
+
     public String generateToken(String email) {
         Date now = new Date();
-        // 2. Token Validity Duration: 24 hours (86,400,000 milliseconds)
-        long jwtExpirationMs = 86400000;
+        long jwtExpirationMs = 86400000; // 24 hours
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
 
         return Jwts.builder()
-                .setSubject(email)                 // Sets 'sub' claim
-                .setIssuedAt(now)                  // Sets 'iat' claim
-                .setExpiration(expiryDate)         // Sets 'exp' claim
-                .signWith(key)                     // Computes cryptographic signature
-                .compact();                        // Assembles Header.Payload.Signature
+                .subject(email) // Updated method signature for JJWT 0.12+
+                .issuedAt(now)
+                .expiration(expiryDate)
+                .signWith(key) // Algorithm is auto-detected from the key size
+                .compact();
     }
 
-    /**
-     * Extracts the user email (subject) from a validated token payload.
-     *
-     * @param token The incoming Base64URL-encoded JWT
-     * @return User's email address string
-     */
     public String getEmailFromToken(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key)               // Provides key to recalculate signature
+        Claims claims = Jwts.parser()
+                .verifyWith(key) // Updated validation style for modern JJWT
                 .build()
-                .parseClaimsJws(token)            // Parses and verifies signature/expiration
-                .getBody();
+                .parseSignedClaims(token)
+                .getPayload();
 
         return claims.getSubject();
     }
 
-    /**
-     * Validates an incoming token against tampering and expiration.
-     *
-     * @param token Incoming JWT string
-     * @return true if valid signature and unexpired; false otherwise
-     */
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(key)
+            Jwts.parser()
+                    .verifyWith(key)
                     .build()
-                    .parseClaimsJws(token);
+                    .parseSignedClaims(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            // Thrown if signature is invalid, token expired, or malformed
             return false;
         }
     }
